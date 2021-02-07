@@ -1,0 +1,1250 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{T1-2018}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{regressuxe3o-linear-com-uma-variavel}{%
+\section{1. Regressão Linear com uma
+Variavel}\label{regressuxe3o-linear-com-uma-variavel}}
+
+    Os dados utilizados nessa parte correspondem a população de cada cidade
+e o lucro da cadeia de food truck daquela cidade. O objetivo é
+implementar regressão linear para predizer o lucro para cada filial.
+
+    \hypertarget{visualizauxe7uxe3o-dos-dados}{%
+\subsection{1.1. Visualização dos
+Dados}\label{visualizauxe7uxe3o-dos-dados}}
+
+    Um importante recurso para conhecer melhor os dados é fazer a sua
+visualização. Abaixo, é apresentado o gráfico de dispersão
+(\emph{scatter plot}) dos dados usados nesta primeira parte do trabalho.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/plot\PYZus{}ex1data1.py        
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Através do gráfico é possível obeservar uma correlação positiva entre as
+variáveis população e lucro.
+
+    \hypertarget{gradiente-descendente}{%
+\subsection{1.2 Gradiente Descendente}\label{gradiente-descendente}}
+
+    Inicialmente serão exibidos os primeiros valores das variáveis
+independente e dependente (\emph{feature} e \emph{target},
+respectivamente), carregados através do script
+\texttt{features\_targets.py}. Por \emph{default} o método abaixo já
+adiciona \(x_0 = 1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{features\PYZus{}targets} \PY{k}{as} \PY{n+nn}{ft}
+        
+        \PY{n}{filepath} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parte1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex1data1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{get\PYZus{}features\PYZus{}and\PYZus{}targets}\PY{p}{(}\PY{n}{filepath}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} array([[ 1.    ,  6.1101],
+               [ 1.    ,  5.5277],
+               [ 1.    ,  8.5186],
+               [ 1.    ,  7.0032],
+               [ 1.    ,  5.8598]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} array([[ 17.592 ],
+               [  9.1302],
+               [ 13.662 ],
+               [ 11.854 ],
+               [  6.8233]])
+\end{Verbatim}
+            
+    Para verificar a corretude dessa função, os parâmetros \(\theta_0\) e
+\(\theta_1\) são inicializados em \(zero\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/custo\PYZus{}reglin\PYZus{}uni.py
+        
+        \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}ou np.array([[0],[0]])}
+        \PY{n}{custo\PYZus{}reglin\PYZus{}uni}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 32.072733877455676
+\end{Verbatim}
+            
+    O gradiente descendente é usado para minimizar a função de Custo
+\(J(\theta_0, \theta_1)\). Ela está implementada em
+\texttt{gd\_reglin\_uni.py}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/gd\PYZus{}reglin\PYZus{}uni.py
+        
+        \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{5000}
+        \PY{n}{custo}\PY{p}{,} \PY{n}{theta} \PY{o}{=} \PY{n}{gd\PYZus{}reglin\PYZus{}uni}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{epochs}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{custo}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[-3.89530051]
+ [ 1.19298539]]
+Custo =  4.47697139698
+
+    \end{Verbatim}
+
+    O valor do hiperparâmetro \texttt{alpha} (taxa de aprendizagem) e do
+\texttt{epochs} (período) foram definidos inicialmente no trabalho. Se o
+\texttt{dataset} não for dividido em lotes (\texttt{batches}), o período
+será igual ao número de iterações para o processo descrito acima,
+executado com o objetivo de minimizar a função de custo. Em outro caso,
+por exemplo, para um \texttt{dataset}de 2000 exemplos se o mesmo for
+dividido em lotes de 500, serão necessárias 4 iterações para completar
+um período.
+
+    Para verificar a convergência, outros valores para \texttt{epochs} foram
+testados, como \(10000\), \(100000\), \(1000000\), este último
+apresentando o valor do custo de \(4.47697137598\). Os valores dos
+parâmetros \(\theta_0\) e \(\theta_1\) que minimizam a função de custo
+são aproximadamente \(-3,90\) e \(1,19\), respectivamente,
+
+    A reta que corresponde aos parâmetros determinados pode ser visualizada
+abaixo. Os valores de \texttt{population} e \texttt{profit} foram
+gerados pelo script \texttt{plot\_ex1data1.py}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/visualizar\PYZus{}reta.py
+        
+        \PY{n}{visualizar\PYZus{}reta}\PY{p}{(}\PY{n}{population}\PY{p}{,} \PY{n}{profit}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Para o modelo de regressão linear produzido acima, é possível predizer o
+lucro em regiões com populações de \(35.000\) e \(70.000\) habitantes.
+Para isso, a hipótese da regressão linear é calculada como o produto
+escalar (\emph{dot product}) de \(h_\theta(x) = \theta^Tx\). O valor do
+lucro para essas duas cidades é obtido pelo código a seguir.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{new\PYZus{}X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{35000}\PY{p}{,}\PY{l+m+mi}{70000}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} ou np.array([[35000,70000]]).T}
+        \PY{n}{new\PYZus{}X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{new\PYZus{}X}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{h} \PY{o}{=} \PY{n}{new\PYZus{}X}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lucro para 35 mil habitantes = }\PY{l+s+si}{\PYZob{}0:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{h}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lucro para 70 mil habitantes = }\PY{l+s+si}{\PYZob{}0:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{h}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Lucro para 35 mil habitantes = 41750.59
+Lucro para 70 mil habitantes = 83505.08
+
+    \end{Verbatim}
+
+    \hypertarget{visualizauxe7uxe3o-de-jtheta}{%
+\subsection{\texorpdfstring{1.3 Visualização de
+\(J(\theta)\)}{1.3 Visualização de J(\textbackslash{}theta)}}\label{visualizauxe7uxe3o-de-jtheta}}
+
+    Os scripts \texttt{visualizar\_J\_contour.py} e
+\texttt{visualizar\_J\_surface.py} produzem, respectivamente, um gráfico
+de curvas de contorno (\emph{contour plot}) e um gráfico da superfície
+(\emph{surface plot}) correspondentes a \(J(\theta)\). Através desses
+gráficos é possível perceber como \(J(\theta)\) varia com os valores de
+\(\theta_0\) e \(\theta_1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/visualizar\PYZus{}J\PYZus{}contour.py
+        
+        \PY{n}{J} \PY{o}{=} \PY{n}{plot\PYZus{}contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte1/visualizar\PYZus{}J\PYZus{}surface.py
+         
+         \PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{regressuxe3o-linear-com-muxfaltiplas-variuxe1veis}{%
+\section{2. Regressão Linear com Múltiplas
+Variáveis}\label{regressuxe3o-linear-com-muxfaltiplas-variuxe1veis}}
+
+    \hypertarget{normalizauxe7uxe3o-das-caracteruxedsticas}{%
+\subsection{Normalização das
+características}\label{normalizauxe7uxe3o-das-caracteruxedsticas}}
+
+    Inicialmente serão exibidos os primeiros valores das variáveis
+independente e dependente (\emph{feature} e \emph{target},
+respectivamente), carregados através do script
+\texttt{features\_targets.py}. Diferentemente da chamada anterior, no
+método para obter as \emph{features} e \emph{targets} do \emph{dataset},
+passsou-se como parâmetro \texttt{add\_ones\ =\ False} para evitar o
+erro \texttt{RuntimeWarning:\ invalid\ value\ encountered\ in\ divide}
+ao executar posteriormente a normalização de \(X\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{import} \PY{n+nn}{features\PYZus{}targets} \PY{k}{as} \PY{n+nn}{ft}
+         
+         \PY{n}{filepath} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parte2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex1data2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{get\PYZus{}features\PYZus{}and\PYZus{}targets}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{add\PYZus{}ones} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} array([[2104,    3],
+                [1600,    3],
+                [2400,    3],
+                [1416,    2],
+                [3000,    4]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} array([[399900],
+                [329900],
+                [369000],
+                [232000],
+                [539900]])
+\end{Verbatim}
+            
+    Para aplicar a normalização ao conjunto de dados do \emph{dataset},
+visto as disparidade na ordem de grandeza dos valores absolutos, usa-se
+o script \texttt{normalizacao.py}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{from} \PY{n+nn}{Parte2} \PY{k}{import} \PY{n}{normalizacao} \PY{k}{as} \PY{n}{nr}
+         
+         \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{y\PYZus{}norm}\PY{p}{,} \PY{n}{mean\PYZus{}X}\PY{p}{,} \PY{n}{std\PYZus{}X}\PY{p}{,} \PY{n}{mean\PYZus{}y}\PY{p}{,} \PY{n}{std\PYZus{}y} \PY{o}{=} \PY{n}{nr}\PY{o}{.}\PY{n}{normalizar\PYZus{}caracteristica}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{X\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} array([[ 0.13141542, -0.22609337],
+                [-0.5096407 , -0.22609337],
+                [ 0.5079087 , -0.22609337],
+                [-0.74367706, -1.5543919 ],
+                [ 1.27107075,  1.10220517]])
+\end{Verbatim}
+            
+    Após a normalização, adiciona-se a variável independente \(x_0 = 1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{X\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} array([[ 1.        ,  0.13141542, -0.22609337],
+                [ 1.        , -0.5096407 , -0.22609337],
+                [ 1.        ,  0.5079087 , -0.22609337],
+                [ 1.        , -0.74367706, -1.5543919 ],
+                [ 1.        ,  1.27107075,  1.10220517]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{y\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} array([[ 0.48089023],
+                [-0.08498338],
+                [ 0.23109745],
+                [-0.87639804],
+                [ 1.61263744]])
+\end{Verbatim}
+            
+    Ao analisar a função \texttt{normalizar\_caracteristica} é possível
+verificar que ela funciona para diversos tamanhos de \(X\) (quantidade
+de caracteristicas). Isso ocorre em virtude da técnica chamada
+\textbf{vetorização}. Apesar do nome, refere-se também a \emph{arrays}
+de duas dimensões (2D) ou mais, e não somente vetores (1D). Em Python,
+vetores/matrizes (\emph{Numpy array}) são importantes porque permitem
+operar os dados sem a necessidade de escrever explicitamente um
+\emph{loop for} para iterar em cada item. As operações vetoriais
+(álgebra linear) podem ser separadas em partes para serem calculadas de
+forma independente e em lote. Essa técnica torna o código mais claro e
+mais eficiente computacionalmente.
+
+    \hypertarget{gradiente-descendente}{%
+\subsection{Gradiente descendente}\label{gradiente-descendente}}
+
+    A função de custo e o gradiente descente para regressão linear com
+múltiplas variáveis, são calculados através
+\texttt{custo\_reglin\_multi.py} e \texttt{gd\_reglin\_multi.py},
+respectivamente. O gradiente descendente é usado para minimizar a função
+de Custo \(J(\theta)\), onde
+\(\theta = <\theta_0, \theta_1,..., \theta_n>\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte2/gd\PYZus{}reglin\PYZus{}multi.py
+         
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{5000}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{J}\PY{p}{,} \PY{n}{theta} \PY{o}{=} \PY{n}{gd}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{y\PYZus{}norm}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{epochs}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ -8.27883861e-17]
+ [  8.84765988e-01]
+ [ -5.31788195e-02]]
+Custo =  0.133527490986
+
+    \end{Verbatim}
+
+    Para verificar a convergência, outros valores para \texttt{epochs} foram
+testados, como \(100\), \(1000\), \(10000\), \(100000\). Os valores dos
+parâmetros \(\theta_0\), \(\theta_1\) e \(\theta_2\) que minimizam a
+função de custo são aproximadamente \(-8,28\), \(8,85\) e \(-5,32\),
+respectivamente.
+
+    E possível observar em ambos os scripts que as operações com as
+características (matriz \(X\)) é realizada pelo método \texttt{.dot()},
+um dos métodos responsáveis pelo produto de matrizes na biblioteca
+Numpy. Esse método dá suporte a operação com qualquer número de linhas e
+colunas, desde que seja respeitada a regra da multiplicação de matrizes,
+sendo ela: \(A_{mxn} . B_{pxq} = C_{mxq} \Leftrightarrow n = p\). Logo,
+para poder operar em uma quantidade \(n\) de características (colunas de
+\(X\)), é necessário que a outra matriz, no caso \(\theta\), possua
+\(n\) número de parâmetros (linhas). Outra propriedade do método
+\texttt{.dot()} é ser vetorizado, e isso significa que ele opera em
+escalares, mas também em vetores/matrizes. Se um \emph{array} de valores
+for passado para essa função, ela será aplicada a cada componente do
+\emph{array}.
+
+    \hypertarget{parte-3-regressuxe3o-loguxedstica}{%
+\section{Parte 3: Regressão
+Logística}\label{parte-3-regressuxe3o-loguxedstica}}
+
+    \hypertarget{visualizauxe7uxe3o-dos-dados}{%
+\subsection{Visualização dos dados}\label{visualizauxe7uxe3o-dos-dados}}
+
+    Antes de aplicar o metodo de aprendizagem de máquina para construir um
+modelo de classificação capaz de estimar a probabilidade de admissão de
+um candidado à Universidade, é importante ter um entendimento dos dados
+estudados, sendo esse o objetivo do gráfico abaixo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte3/plot\PYZus{}ex2data1.py
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{implementauxe7uxe3o}{%
+\subsection{Implementação}\label{implementauxe7uxe3o}}
+
+    \hypertarget{funuxe7uxe3o-sigmoide}{%
+\subsubsection{Função sigmoide}\label{funuxe7uxe3o-sigmoide}}
+
+    Teste para verificação dos valores de retornos esperados para a função
+sigmoide.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte3/sigmoide.py
+         
+         \PY{n+nb}{input} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10000}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sigmoide}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} array([ 0.5,  1. ,  0. ])
+\end{Verbatim}
+            
+    \hypertarget{funuxe7uxe3o-de-custo-e-gradiente}{%
+\subsubsection{Função de custo e
+gradiente}\label{funuxe7uxe3o-de-custo-e-gradiente}}
+
+    A seguir, os dados são obtidos e normalizados para o calculo da função
+de custo e do gradiente descedente.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{filepath} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parte3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex2data1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{examData}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{get\PYZus{}features\PYZus{}and\PYZus{}targets}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{add\PYZus{}ones} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{examData}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} array([[ 34.62365962,  78.02469282],
+                [ 30.28671077,  43.89499752],
+                [ 35.84740877,  72.90219803],
+                [ 60.18259939,  86.3085521 ],
+                [ 79.03273605,  75.34437644]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{labels}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} array([[0],
+                [0],
+                [0],
+                [1],
+                [1]])
+\end{Verbatim}
+            
+    O script \texttt{normalizacao.py} usado na Parte 2 também é aplicado
+para os dados da regressão logística com o objetivo de normalizar as
+características.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{n}{labels\PYZus{}norm}\PY{p}{,} \PY{n}{mean\PYZus{}examData}\PY{p}{,} \PY{n}{std\PYZus{}examData}\PY{p}{,} \PY{n}{mean\PYZus{}labels}\PY{p}{,} \PY{n}{std\PYZus{}labels} \PY{o}{=} \PY{n}{nr}\PY{o}{.}\PY{n}{normalizar\PYZus{}caracteristica}\PY{p}{(}\PY{n}{examData}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         \PY{n}{examData\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} array([[-1.60224763,  0.63834112],
+                [-1.82625564, -1.2075414 ],
+                [-1.53903969,  0.3612943 ],
+                [-0.28210129,  1.0863683 ],
+                [ 0.69152826,  0.49337794]])
+\end{Verbatim}
+            
+    Após a normalização, adiciona-se a variável independente \(x_0 = 1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{examData\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{examData\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} array([[ 1.        , -1.60224763,  0.63834112],
+                [ 1.        , -1.82625564, -1.2075414 ],
+                [ 1.        , -1.53903969,  0.3612943 ],
+                [ 1.        , -0.28210129,  1.0863683 ],
+                [ 1.        ,  0.69152826,  0.49337794]])
+\end{Verbatim}
+            
+    Para o calculo da função de custo, o valor do vetor de parâmetros
+\(\theta\) é inicializado em \(zero\), onde o tamanho do vetor é
+definido com base nas \(n\) características da matriz
+\texttt{examData\_norm}. Nesse caso, \(n = 3\) para
+\(examData\_norm = <x_0, x_1, x_2>\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte3/custo\PYZus{}reglog.py
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglog}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Custo =  0.69314718056
+
+    \end{Verbatim}
+
+    \hypertarget{aprendizado-dos-paruxe2metros}{%
+\subsubsection{Aprendizado dos
+parâmetros}\label{aprendizado-dos-paruxe2metros}}
+
+    Assim como na regressão linear, na regressão logística, o objetivo é
+minimizar \(J(\theta)\) com relação ao vetor de parâmetros θ. Abaixo,
+utiliza-se a implementação do gradiente descendente do script
+\texttt{gd\_reglog.py} para encontrar o vetor \(\theta\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte3/gd\PYZus{}reglog.py
+         
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{as} \PY{n+nn}{opt}
+         
+         \PY{n}{result} \PY{o}{=} \PY{n}{opt}\PY{o}{.}\PY{n}{fmin\PYZus{}tnc}\PY{p}{(}\PY{n}{func}\PY{o}{=}\PY{n}{custo\PYZus{}reglog}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{theta}\PY{p}{,} \PY{n}{fprime}\PY{o}{=}\PY{n}{gd\PYZus{}reglog}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{)}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglog}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vetor de parâmetros = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vetor de parâmetros =  [ 1.71787865  3.99150586  3.72363974]
+Custo =  0.203497715646
+
+    \end{Verbatim}
+
+    \hypertarget{avaliauxe7uxe3o-do-modelo}{%
+\subsubsection{Avaliação do modelo}\label{avaliauxe7uxe3o-do-modelo}}
+
+    Após o treinamento do modelo com os dados de treinamento, modelo
+correspondente pode predizer se um candidato qualquer será aprovado.
+Supostamente, se um candidato com notas 45 e 85 na primeira e segunda
+avaliações, respectivamente, terá a probabilidade de 78\% de ser
+aprovado, como indicado abaixo (aproximadamente 80\%, conforme esperado
+pelo enunciado).
+
+    Importante destacar que os novos valores de avaliação foram normalizados
+com os valores de média (\texttt{mean\_examData}) e desvio padrão
+(\texttt{std\_examData}) calculados anteriormente para o conjunto de
+treinamento.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{new\PYZus{}examData} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{85}\PY{p}{]}\PY{p}{)} 
+         
+         \PY{n}{new\PYZus{}examData\PYZus{}norm} \PY{o}{=} \PY{p}{(}\PY{n}{new\PYZus{}examData} \PY{o}{\PYZhy{}} \PY{n}{mean\PYZus{}examData}\PY{p}{)} \PY{o}{/} \PY{n}{std\PYZus{}examData}
+         \PY{n}{new\PYZus{}examData\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{new\PYZus{}examData\PYZus{}norm}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+         
+         \PY{n}{h} \PY{o}{=} \PY{n}{sigmoide}\PY{p}{(}\PY{n}{new\PYZus{}examData\PYZus{}norm}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probabilidade de ser aprovado de }\PY{l+s+si}{\PYZob{}0:.0f\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{h}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Probabilidade de ser aprovado de 78\%
+
+    \end{Verbatim}
+
+    Avaliar a capacidade de predição é necessário para determinar a
+qualidade dos parâmetros do modelo construido. No caso de um
+classificador, como este da Parte 3, uma forma de avaliar é através da
+seguinte métrica: o quão frequente o classificador está correto. Essa
+medida de desempenho é chamada acurácia e ela está implementada no
+script \texttt{predizer\_aprovacao.py}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{from} \PY{n+nn}{Parte3} \PY{k}{import} \PY{n}{predizer\PYZus{}aprovacao} \PY{k}{as} \PY{n}{pa}
+         
+         \PY{n}{pa}\PY{o}{.}\PY{n}{acuracia}\PY{p}{(}\PY{n}{examData\PYZus{}norm}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Acurácia de 89\%
+
+    \end{Verbatim}
+
+    \hypertarget{parte-4-regressuxe3o-loguxedstica-com-regularizauxe7uxe3o}{%
+\section{Parte 4: Regressão Logística com
+Regularização}\label{parte-4-regressuxe3o-loguxedstica-com-regularizauxe7uxe3o}}
+
+    \hypertarget{visualizauxe7uxe3o-dos-dados}{%
+\subsection{Visualização dos Dados}\label{visualizauxe7uxe3o-dos-dados}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte4/plot\PYZus{}ex2data2.py
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{mapeamento-de-caracteruxedsticas-feature-mapping}{%
+\subsection{\texorpdfstring{Mapeamento de características (\emph{feature
+mapping})}{Mapeamento de características (feature mapping)}}\label{mapeamento-de-caracteruxedsticas-feature-mapping}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{filepath} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parte4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex2data2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{ft}\PY{o}{.}\PY{n}{get\PYZus{}features\PYZus{}and\PYZus{}targets}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{add\PYZus{}ones} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} array([[ 0.051267,  0.69956 ],
+                [-0.092742,  0.68494 ],
+                [-0.21371 ,  0.69225 ],
+                [-0.375   ,  0.50219 ],
+                [-0.51325 ,  0.46564 ]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k+kn}{from} \PY{n+nn}{Parte4} \PY{k}{import} \PY{n}{mapFeature} \PY{k}{as} \PY{n}{mf}
+         
+         \PY{n}{feature\PYZus{}1} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{feature\PYZus{}2} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+         \PY{n}{X} \PY{o}{=} \PY{n}{mf}\PY{o}{.}\PY{n}{mapFeature}\PY{p}{(}\PY{n}{feature\PYZus{}1}\PY{p}{,} \PY{n}{feature\PYZus{}2}\PY{p}{,} \PY{n}{grau}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{funuxe7uxe3o-de-custo-e-gradiente}{%
+\subsection{Função de custo e
+gradiente}\label{funuxe7uxe3o-de-custo-e-gradiente}}
+
+    Para cálculo da função de custo o valor do vetor de parâmetros
+\(\theta\) é inicializado em \(zero\), onde o tamanho do vetor é
+definido com base nas \(n\) características da matriz \(X\).
+
+    \textbf{Obs.:} Como o valor de \(n\) é alto (\(n = 28\)), sendo custoso
+inicializá-lo como feito anteriormente, então nesse caso o vetor
+\(\theta\) será inicializado com o método \texttt{np.zeros()}, passando
+o número de colunas (características) da matriz \(X\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte4/costFunctionReg.py
+         
+         \PY{n}{\PYZus{}lambda} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglog\PYZus{}reg}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Custo =  0.69314718056
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{result} \PY{o}{=} \PY{n}{opt}\PY{o}{.}\PY{n}{fmin\PYZus{}tnc}\PY{p}{(}\PY{n}{func}\PY{o}{=}\PY{n}{custo\PYZus{}reglog\PYZus{}reg}\PY{p}{,} \PY{n}{x0}\PY{o}{=}\PY{n}{theta}\PY{p}{,} \PY{n}{fprime}\PY{o}{=}\PY{n}{gd\PYZus{}reglog\PYZus{}reg}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}\PY{p}{)}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglog\PYZus{}reg}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vetor de parâmetros = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vetor de parâmetros =  [ 1.27422019  0.62478648  1.18590382 -2.02173842 -0.91708234 -1.41319144
+  0.1244437  -0.36770518 -0.3645818  -0.1806779  -1.46506498 -0.062887
+ -0.61999791 -0.27174432 -1.20129286 -0.23663767 -0.20901439 -0.05490415
+ -0.27804408 -0.29276909 -0.46790787 -1.04396486  0.02082843 -0.2963854
+  0.00961556 -0.32917184 -0.13804208 -0.93550834]
+
+Custo =  0.462248731537
+
+    \end{Verbatim}
+
+    \hypertarget{esbouxe7o-da-fronteira-de-decisuxe3o}{%
+\subsection{Esboço da fronteira de
+decisão}\label{esbouxe7o-da-fronteira-de-decisuxe3o}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte4/plot\PYZus{}ex2data2.py
+         \PY{o}{\PYZpc{}}\PY{k}{run} Parte4/plotDecisionBoundary.py
+         
+         \PY{n}{plot\PYZus{}boundary}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{grau}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{parte-5-regressuxe3o-linear-com-regularizauxe7uxe3o}{%
+\section{Parte 5: Regressão Linear com
+Regularização}\label{parte-5-regressuxe3o-linear-com-regularizauxe7uxe3o}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io}
+         
+         \PY{n}{data} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parte5/ex5data1.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}conjunto de treinamento}
+         \PY{n}{\PYZus{}Xval}\PY{p}{,} \PY{n}{yval} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} conjunto de desenvolvimento}
+         \PY{n}{\PYZus{}Xtest}\PY{p}{,} \PY{n}{ytest} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xtest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ytest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}conjunto de teste}
+\end{Verbatim}
+
+
+    \hypertarget{visualizauxe7uxe3o-dos-dados}{%
+\subsection{Visualização dos Dados}\label{visualizauxe7uxe3o-dos-dados}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}ex5data1}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mudança no nível da água (x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Água saindo da barragem (y)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}ex5data1}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{funuxe7uxe3o-de-custo-da-regressuxe3o-linear-regularizada}{%
+\subsection{Função de custo da regressão linear
+regularizada}\label{funuxe7uxe3o-de-custo-da-regressuxe3o-linear-regularizada}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}Insert a column of 1\PYZsq{}s to all of the X\PYZsq{}s, as usual}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Xval} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{\PYZus{}Xval} \PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Xtest} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{\PYZus{}Xtest}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte5/linearRegCostFunction.py
+         
+         \PY{n}{\PYZus{}lambda} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglin\PYZus{}regularizada}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Custo =  303.99319222
+
+    \end{Verbatim}
+
+    \hypertarget{gradiente-na-regressuxe3o-linear-regularizada}{%
+\subsection{Gradiente na regressão linear
+regularizada}\label{gradiente-na-regressuxe3o-linear-regularizada}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{gradiente} \PY{o}{=} \PY{n}{gd\PYZus{}regularizada}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gradiente}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gradiente}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Gradiente
+ [[ -15.30301567]
+ [ 598.25074417]]
+
+    \end{Verbatim}
+
+    \hypertarget{ajustando-os-paruxe2metros-da-regressuxe3o-linear}{%
+\subsection{Ajustando os parâmetros da regressão
+linear}\label{ajustando-os-paruxe2metros-da-regressuxe3o-linear}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{\PYZus{}lambda} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{c+c1}{\PYZsh{}result = opt.fmin\PYZus{}tnc(func=custo\PYZus{}reglin\PYZus{}regularizada, x0=theta, fprime=gd\PYZus{}regularizada, args=(X, y, \PYZus{}lambda))}
+         \PY{n}{result} \PY{o}{=} \PY{n}{encontrar\PYZus{}theta\PYZus{}otimo}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{J} \PY{o}{=} \PY{n}{custo\PYZus{}reglin\PYZus{}regularizada}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vetor de parâmetros = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Custo = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{J}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vetor de parâmetros =  [ 13.08790362   0.36777923]
+Custo =  22.3739064951
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{h} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}ex5data1}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{h}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} [<matplotlib.lines.Line2D at 0x7f58e5070d30>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_95_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{viuxe9s-variuxe2ncia}{%
+\section{6. Viés-Variância}\label{viuxe9s-variuxe2ncia}}
+
+    \hypertarget{curvas-de-aprendizado}{%
+\subsection{6.1. Curvas de Aprendizado}\label{curvas-de-aprendizado}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte6/learningCurve.py
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{numero\PYZus{}exemplos}\PY{p}{,} \PY{n}{erros\PYZus{}treino}\PY{p}{,} \PY{n}{erros\PYZus{}val} \PY{o}{=} \PY{n}{learningCurve}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{Xval}\PY{p}{,} \PY{n}{yval}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plot\PYZus{}learning\PYZus{}curve}\PY{p}{(}\PY{n}{numero\PYZus{}exemplos}\PY{p}{,}\PY{n}{erros\PYZus{}treino}\PY{p}{,} \PY{n}{erros\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_98_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{regressuxe3o-polinomial}{%
+\section{7. Regressão Polinomial}\label{regressuxe3o-polinomial}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X original}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{\PYZus{}X}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X original
+ [[-15.93675813]
+ [-29.15297922]
+ [ 36.18954863]
+ [ 37.49218733]
+ [-48.05882945]]
+
+    \end{Verbatim}
+
+    \hypertarget{regressuxe3o-polinomial---aprendizado}{%
+\subsection{7.1 Regressão Polinomial -
+aprendizado}\label{regressuxe3o-polinomial---aprendizado}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{o}{\PYZpc{}}\PY{k}{run} Parte7/poly\PYZus{}features.py
+         
+         \PY{n}{grau} \PY{o}{=} \PY{l+m+mi}{8}
+         \PY{n}{X\PYZus{}poli} \PY{o}{=} \PY{n}{poly\PYZus{}features}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{grau}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{y\PYZus{}norm}\PY{p}{,} \PY{n}{mean\PYZus{}X}\PY{p}{,} \PY{n}{std\PYZus{}X}\PY{p}{,} \PY{n}{mean\PYZus{}y}\PY{p}{,} \PY{n}{std\PYZus{}y} \PY{o}{=} \PY{n}{nr}\PY{o}{.}\PY{n}{normalizar\PYZus{}caracteristica}\PY{p}{(}\PY{n}{X\PYZus{}poli}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}exibição somente das 4 primeiras colunas}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ -3.78243704e-01  -7.88662325e-01   1.90328720e-01  -7.37591303e-01]
+ [ -8.38920100e-01   1.31420204e-03  -2.58961742e-01  -3.41564822e-01]
+ [  1.43871736e+00   6.10831582e-01   1.30534069e+00   2.56220001e-01]
+ [  1.48412330e+00   7.38068463e-01   1.42031240e+00   4.13121830e-01]
+ [ -1.49791929e+00   1.93643966e+00  -2.12774745e+00   2.43510061e+00]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{X\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[  1.00000000e+00  -3.78243704e-01  -7.88662325e-01   1.90328720e-01]
+ [  1.00000000e+00  -8.38920100e-01   1.31420204e-03  -2.58961742e-01]
+ [  1.00000000e+00   1.43871736e+00   6.10831582e-01   1.30534069e+00]
+ [  1.00000000e+00   1.48412330e+00   7.38068463e-01   1.42031240e+00]
+ [  1.00000000e+00  -1.49791929e+00   1.93643966e+00  -2.12774745e+00]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}from Parte5 import linearRegCostFunction as cfunc}
+         \PY{o}{\PYZpc{}}\PY{k}{run} Parte5/linearRegCostFunction.py
+         
+         \PY{n}{\PYZus{}lambda} \PY{o}{=} \PY{l+m+mf}{0.003}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}norm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{result} \PY{o}{=} \PY{n}{encontrar\PYZus{}theta\PYZus{}otimo}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{p}{)}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vetor de parâmetros}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Vetor de parâmetros
+ [ 11.21741516  11.24759535  13.3667595    8.47664286  -9.34749626
+ -10.41970327   4.37507541   1.48165552  -3.64657688]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{65}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n}{x\PYZus{}poli} \PY{o}{=} \PY{n}{poly\PYZus{}features}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{grau}\PY{p}{)}
+         \PY{n}{x\PYZus{}poli} \PY{o}{=} \PY{p}{(}\PY{n}{x\PYZus{}poli} \PY{o}{\PYZhy{}} \PY{n}{mean\PYZus{}X}\PY{p}{)}
+         \PY{n}{x\PYZus{}poli} \PY{o}{=} \PY{n}{x\PYZus{}poli} \PY{o}{/} \PY{n}{std\PYZus{}X}
+         \PY{n}{x\PYZus{}poli} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{x\PYZus{}poli}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{h} \PY{o}{=} \PY{n}{x\PYZus{}poli}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}ex5data1}\PY{p}{(}\PY{n}{\PYZus{}X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ajuste polinomial (aprox. lambda = 0)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_106_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{X\PYZus{}poli\PYZus{}val} \PY{o}{=} \PY{n}{poly\PYZus{}features}\PY{p}{(}\PY{n}{\PYZus{}Xval}\PY{p}{,} \PY{n}{grau}\PY{p}{)}
+         \PY{n}{X\PYZus{}norm\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}norm\PYZus{}val}\PY{p}{,}\PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{nr}\PY{o}{.}\PY{n}{normalizar\PYZus{}caracteristica}\PY{p}{(}\PY{n}{X\PYZus{}poli\PYZus{}val}\PY{p}{,} \PY{n}{yval}\PY{p}{)}
+         \PY{n}{X\PYZus{}norm\PYZus{}val} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{X\PYZus{}norm\PYZus{}val}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}norm\PYZus{}val}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}inicialização}
+         \PY{n}{numero\PYZus{}exemplos}\PY{p}{,} \PY{n}{erros\PYZus{}treino}\PY{p}{,} \PY{n}{erros\PYZus{}val} \PY{o}{=} \PY{n}{learningCurve}\PY{p}{(}\PY{n}{theta}\PY{p}{,} \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{X\PYZus{}norm\PYZus{}val}\PY{p}{,} \PY{n}{yval}\PY{p}{,} \PY{n}{\PYZus{}lambda}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plot\PYZus{}learning\PYZus{}curve}\PY{p}{(}\PY{n}{numero\PYZus{}exemplos}\PY{p}{,} \PY{n}{erros\PYZus{}treino}\PY{p}{,} \PY{n}{erros\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curva de aprendizado para regressão linear polinomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_107_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
